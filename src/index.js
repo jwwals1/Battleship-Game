@@ -155,18 +155,18 @@ const computerSunkShips = []
 function playerMove(e) {
     if (!gameOver) {
         if (e.target.classList.contains('taken')) {
-            e.target.classList.add('boom')
+            e.target.classList.add('hit')
             infoDisplay.textContent = " You hit the computers ship"
             let classes = Array.from(e.target.classList)
             classes = classes.filter(className => className !== 'block')
-            classes = classes.filter(className => className !== 'boom')
+            classes = classes.filter(className => className !== 'hit')
             classes = classes.filter(className => className !== 'taken')
             playerHits.push(...classes)
             checkScore('player', playerHits, playerSunkShips)
         }
         if (!e.target.classList.contains('taken')) {
             infoDisplay.textContent = ' Nothing hit this time'
-            e.target.classList.add('empty')
+            e.target.classList.add('miss')
         }
         playerTurn = false
         const allBoardBlocks = document.querySelectorAll('#computer div')
@@ -177,7 +177,7 @@ function playerMove(e) {
 
 function computerMove() {
     if (!gameOver) {
-        turnDisplay.textContent = " Computer Go!"
+        turnDisplay.textContent = " Computer's Turn"
         infoDisplay.textContent = 'The computer is thinking...'
 
         setTimeout(() =>{
@@ -185,25 +185,25 @@ function computerMove() {
             const allBoardBlocks = document.querySelectorAll('#player div')
             
             if (allBoardBlocks[randomGo].classList.contains('taken') && 
-                allBoardBlocks[randomGo].classList.contains('boom')
+                allBoardBlocks[randomGo].classList.contains('hit')
             ) {
                 computerMove()
                 return
             } else if (
                 allBoardBlocks[randomGo].classList.contains('taken') &&
-                !allBoardBlocks[randomGo].classList.contains('boom')
+                !allBoardBlocks[randomGo].classList.contains('hit')
             ) {
-                allBoardBlocks[randomGo].classList.add('boom')
+                allBoardBlocks[randomGo].classList.add('hit')
                 infoDisplay.textContent = 'The computer hit your ship!'
                 let classes = Array.from(allBoardBlocks[randomGo].classList)
                 classes = classes.filter(className => className !== 'block')
-                classes = classes.filter(className => className !== 'boom')
+                classes = classes.filter(className => className !== 'hit')
                 classes = classes.filter(className => className !== 'taken')
                 computerHits.push(...classes)
                 checkScore('computer', computerHits, computerSunkShips)
             } else {
                 infoDisplay.textContent = 'Nothing hit this time'
-                allBoardBlocks[randomGo].classList.add('empty')
+                allBoardBlocks[randomGo].classList.add('miss')
             }
         }, 2000)
 
