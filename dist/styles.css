@@ -32,12 +32,12 @@ h2 {
 }
 
 #player-board-title {
-    margin-right: 100px;
+    margin-right: 40px;
     /* margin-left: 100px; */
 }
 
 #opponent-board-title {
-    margin-left: 100px;
+    margin-left: 140px;
 }
 
 #gamesboard-container {
@@ -140,11 +140,11 @@ h2 {
     background-color: black;
 }
 
-.boom {
+.hit {
     background-color: red !important;
 }
 
-.empty {
+.miss {
     background-color: gray !important;
 }
 
@@ -166,6 +166,10 @@ h2 {
     margin-right: 5px;
 }
 
+#flip-button:hover {
+    opacity: .7;
+}
+
 #start-button {
     background-color: blue;
     color: white;
@@ -173,6 +177,10 @@ h2 {
     padding: 8px;
     border-radius: 10px;
     margin-left: 5px;
+}
+
+#start-button:hover {
+    opacity: .7;
 }
 
 
