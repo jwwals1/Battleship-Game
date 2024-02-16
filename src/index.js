@@ -6,10 +6,11 @@ const flipbutton = document.querySelector('#flip-button')
 const startButton = document.querySelector('#start-button')
 const infoDisplay = document.querySelector('#info')
 const turnDisplay = document.querySelector('#turn-display')
+infoDisplay.textContent = ' Drag your ships onto your board'
  
 
-createBoard('yellow', 'player')
-createBoard('pink', 'computer')
+createBoard('white', 'player')
+createBoard('black', 'computer')
 
 
 let degree = 0
@@ -138,7 +139,7 @@ function startGame() {
             const allBoardBlocks = document.querySelectorAll('#computer div')
             allBoardBlocks.forEach(block => block.addEventListener('click', playerMove))
             playerTurn = true
-            turnDisplay.textContent = 'Your turn'
+            turnDisplay.textContent = ' Your turn'
             infoDisplay.textContent = 'The game has started'
         }
     }
@@ -155,7 +156,7 @@ function playerMove(e) {
     if (!gameOver) {
         if (e.target.classList.contains('taken')) {
             e.target.classList.add('boom')
-            infoDisplay.textContent = "You hit the computers ship"
+            infoDisplay.textContent = " You hit the computers ship"
             let classes = Array.from(e.target.classList)
             classes = classes.filter(className => className !== 'block')
             classes = classes.filter(className => className !== 'boom')
@@ -164,7 +165,7 @@ function playerMove(e) {
             checkScore('player', playerHits, playerSunkShips)
         }
         if (!e.target.classList.contains('taken')) {
-            infoDisplay.textContent = 'Nothing hit this time'
+            infoDisplay.textContent = ' Nothing hit this time'
             e.target.classList.add('empty')
         }
         playerTurn = false
@@ -176,7 +177,7 @@ function playerMove(e) {
 
 function computerMove() {
     if (!gameOver) {
-        turnDisplay.textContent = "Computer Go!"
+        turnDisplay.textContent = " Computer Go!"
         infoDisplay.textContent = 'The computer is thinking...'
 
         setTimeout(() =>{
@@ -208,7 +209,7 @@ function computerMove() {
 
         setTimeout(() => {
             playerTurn = true
-            turnDisplay.textContent = 'Your Turn'
+            turnDisplay.textContent = ' Your Turn'
             infoDisplay.textContent = 'Please take your turn'
             const allBoardBlocks = document.querySelectorAll('#computer div')
             allBoardBlocks.forEach(block => block.addEventListener('click', playerMove))
@@ -222,7 +223,7 @@ function checkScore(user, userHits, userSunkShips) {
             userHits.filter(storedShipName => storedShipName === shipName).length === shipLength
         ) {
             if (user === 'player') {
-                infoDisplay.textContent = `you sunk computer's ${shipName}`
+                infoDisplay.textContent = ` You sunk computer's ${shipName}`
                 playerHits = userHits.filter(storedShipName => storedShipName !== shipName)
             }
             if (user === 'computer') {
@@ -240,7 +241,7 @@ function checkScore(user, userHits, userSunkShips) {
     checkShip('carrier', 5)
 
     if (playerSunkShips.length === 5) {
-    infoDisplay.textContent = 'you sunk all the computers ships. You won'
+    infoDisplay.textContent = 'You sunk all the computers ships. You won'
     gameOver = true
     }
     if (computerSunkShips.length === 5) {
